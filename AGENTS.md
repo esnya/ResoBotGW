@@ -136,9 +136,12 @@
   - 設定: `MCP_STDIO_COMMAND`（必須）、`MCP_STDIO_ARGS`（任意、空白区切り）。
   - 実装: Config に追加し、OpenAI ランナーで `Agent(mcp_servers=[MCPServerStdio(params=...)])` を構成。
 - [Now] Observability: ランナー呼び出しのレイテンシ計測ポイントを追加。
+- [Now] GW Boundary Mock: 並列エージェント連携を検証するための外部境界モックを確立。
+  - `docs/GlobalWorkspace_BoundaryMock.md` に設計を記述し、テスト用の `MockWorld` を提供。
 - [Next] Agents Orchestrator: 並列実行・調停の最小骨格（TaskGroup 等）。
-- [Next] Tests: 結合（MCP Stdio フェイク）/スモークの拡充。
+- [Next] Tests: 結合（MCP Stdio フェイク）/スモークを GW Boundary Mock を用いて拡充。
 - [Next] Docs: README に MCP 設定と実行例を追記。
 
 【Done】
+
 - Docs: OpenAI Agents ドキュメント確認（API/名前解決）—完了（`from agents import Agent, Runner`／`Runner.run()`）

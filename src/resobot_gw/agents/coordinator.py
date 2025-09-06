@@ -6,8 +6,8 @@ committing compatible ones via the `Arbiter`. Emits a `commit` event on the Bus.
 
 from __future__ import annotations
 
+from collections.abc import Iterable, Sequence
 from dataclasses import dataclass
-from typing import Iterable, Sequence
 
 from resobot_gw.bus import Bus, Event
 
@@ -33,10 +33,8 @@ class Coordinator:
     def tick(self, proposers: Sequence[Proposer]) -> list[Intent]:
         proposals: list[Intent] = []
         for p in proposers:
-            for it in p.propose():
-                proposals.append(it)
+            proposals.extend(p.propose())
         committed = self.arbiter.tick(proposals)
         if committed:
             self.bus.publish(Event(topic=self.topic_commit, payload=committed))
         return committed
-
