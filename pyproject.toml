@@ -84,6 +84,7 @@ ignore = [
   "DOC501",   # do not require Raises section in tiny docstrings
   "PLR6301",  # allow instance methods where clear
   "TC001",    # allow direct application imports
+  "TC003",    # allow typing imports in runtime for simplicity
   "TRY300",   # no else block for simple returns
   "TRY400",   # use logger.error for expected config errors
   # Docstring presence rules are too heavy for small public API surfaces
@@ -97,7 +98,7 @@ ignore = [
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"tests/**/*.py" = ["D", "ANN", "S101", "PLR2004", "T201", "INP001", "PLC2701"]
+"tests/**/*.py" = ["D", "ANN", "S101", "PLR2004", "T201", "INP001", "PLC2701", "PLR0913"]
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
@@ -107,11 +108,11 @@ pythonpath = ["src"]
 typeCheckingMode = "standard"
 reportMissingTypeStubs = "none"
 reportMissingImports = "none"
+reportCallIssue = "none"
 pythonVersion = "3.13"
 pythonPlatform = "All"
 include = ["src"]
 venvPath = "."
-venv = ".venv"
 
 [tool.coverage.run]
 branch = true

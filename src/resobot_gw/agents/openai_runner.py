@@ -13,7 +13,11 @@ from dataclasses import dataclass
 
 # Import Agents SDK at module import time (no dynamic import per policy)
 from agents import Agent, Runner  # type: ignore[import-not-found]
-from agents.mcp import MCPServerStdio  # type: ignore[import-not-found]
+from agents.mcp import (  # type: ignore[import-not-found]
+    MCPServer,
+    MCPServerStdio,
+    MCPServerStdioParams,
+)
 
 from .interface import AgentRunner
 
@@ -35,9 +39,9 @@ class OpenAIAgentsRunner(AgentRunner):
     mcp_stdio_args: tuple[str, ...] = ()
 
     async def run(self) -> None:  # pragma: no cover - requires network to exercise
-        mcp_servers = []
+        mcp_servers: list[MCPServer] = []
         if self.mcp_stdio_command:
-            params = {"command": self.mcp_stdio_command}
+            params: MCPServerStdioParams = {"command": self.mcp_stdio_command}
             if self.mcp_stdio_args:
                 params["args"] = list(self.mcp_stdio_args)
             mcp_servers = [MCPServerStdio(params=params)]
